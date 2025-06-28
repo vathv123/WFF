@@ -185,6 +185,41 @@ function unmuteActiveVideo() {
 // Listen once for user interaction anywhere
 window.addEventListener('touchstart', unmuteActiveVideo, { once: true });
 window.addEventListener('click', unmuteActiveVideo, { once: true });
+// function updateVideoPlayback() {
+//   const activeRealIndex = swiper1.realIndex;
+//   document.querySelectorAll('video.trailer').forEach((video, index) => {
+//     if (index === activeRealIndex) {
+//       if (!video.src) {
+//         video.src = videoSources[index];
+//         video.load();
+//       }
+      
+//       if (window.innerWidth <= 756) {
+//         video.muted = !userInteracted;
+//         video.play().catch(err => {
+//           console.warn("Autoplay blocked or failed", err);
+//         });
+//       } else {
+//         video.muted = false;
+//         video.play().catch(err => {
+//           console.warn("Autoplay blocked or failed", err);
+//         });
+//       }
+
+//       video.play().catch(err => {
+//         console.warn("Autoplay blocked or failed", err);
+//       });
+//       video.onended = () => {
+//         swiper2.slideNext();
+//       };
+//     } else {
+//       video.pause();
+//       video.currentTime = 0;
+//       video.muted = true;
+//       video.onended = null;
+//     }
+//   });
+// }
 function updateVideoPlayback() {
   const activeRealIndex = swiper1.realIndex;
   document.querySelectorAll('video.trailer').forEach((video, index) => {
