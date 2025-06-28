@@ -29,19 +29,19 @@ let swiper1;
 let swiper2;
 
 const videoSources = [
-  "src/video/HearmeOursummer.mp4",
-  "src/video/Myboo.mp4",
-  "src/video/InvincibleSwordman.mp4",
-  "src/video/ForbiddenZone.mp4",
-  "src/video/Bigworld.mp4",
-  "src/video/PandaPlan.mp4"
+  "video/HearmeOursummer.mp4",
+  "video/Myboo.mp4",
+  "video/InvincibleSwordman.mp4",
+  "video/ForbiddenZone.mp4",
+  "video/Bigworld.mp4",
+  "video/PandaPlan.mp4"
 ];
 
 // 1. Insert video elements before initializing Swiper
 // ✅ Set video elements first
 document.querySelectorAll('.slideShowMain').forEach((item, index) => {
   item.innerHTML = `
-    <video class="w-full h-full object-cover trailer" muted loop playsinline>  <source src="${videoSources[index]}" type="video/mp4"> </video>
+    <video class="w-full h-full object-cover trailer" muted loop playsinline></video>
   `;
 });
 
@@ -185,62 +185,30 @@ function unmuteActiveVideo() {
 // Listen once for user interaction anywhere
 window.addEventListener('touchstart', unmuteActiveVideo, { once: true });
 window.addEventListener('click', unmuteActiveVideo, { once: true });
-// function updateVideoPlayback() {
-//   const activeRealIndex = swiper1.realIndex;
-//   document.querySelectorAll('video.trailer').forEach((video, index) => {
-//     if (index === activeRealIndex) {
-//       if (!video.src) {
-//         video.src = videoSources[index];
-//         video.load();
-//       }
-      
-//       if (window.innerWidth <= 756) {
-//         video.muted = !userInteracted;
-//         video.play().catch(err => {
-//           console.warn("Autoplay blocked or failed", err);
-//         });
-//       } else {
-//         video.muted = false;
-//         video.play().catch(err => {
-//           console.warn("Autoplay blocked or failed", err);
-//         });
-//       }
-
-//       video.play().catch(err => {
-//         console.warn("Autoplay blocked or failed", err);
-//       });
-//       video.onended = () => {
-//         swiper2.slideNext();
-//       };
-//     } else {
-//       video.pause();
-//       video.currentTime = 0;
-//       video.muted = true;
-//       video.onended = null;
-//     }
-//   });
-// }
 function updateVideoPlayback() {
   const activeRealIndex = swiper1.realIndex;
   document.querySelectorAll('video.trailer').forEach((video, index) => {
-    const source = video.querySelector('source');
-    
     if (index === activeRealIndex) {
-      if (!source.src || source.src.indexOf(videoSources[index]) === -1) {
-        source.src = videoSources[index];
+      if (!video.src) {
+        video.src = videoSources[index];
         video.load();
       }
       
       if (window.innerWidth <= 756) {
         video.muted = !userInteracted;
+        video.play().catch(err => {
+          console.warn("Autoplay blocked or failed", err);
+        });
       } else {
         video.muted = false;
+        video.play().catch(err => {
+          console.warn("Autoplay blocked or failed", err);
+        });
       }
 
       video.play().catch(err => {
         console.warn("Autoplay blocked or failed", err);
       });
-
       video.onended = () => {
         swiper2.slideNext();
       };
@@ -252,7 +220,6 @@ function updateVideoPlayback() {
     }
   });
 }
-
 
 swiper1.on('slideChangeTransitionEnd', () => {
   updateVideoPlayback();
