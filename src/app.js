@@ -24,6 +24,16 @@ requestAnimationFrame(raf);
 //     gsap.set(img, { scale: 1.1 });
 //   }
 // });
+   document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("mainBody").classList.add("hidden");
+    document.getElementById("loader").style.display = "flex";
+  });
+
+  // When all page resources load, swap loader and main content visibility
+  window.addEventListener("load", function () {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("mainBody").classList.remove("hidden");
+  });
 let swiper1;
 let swiper2;
 
@@ -40,7 +50,6 @@ const videoSources = [
   "../video/Pandaplan.mp4"
 ];
 
-// Block F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+U, Ctrl+S, Ctrl+Shift+J
 document.onkeydown = function (e) {
   if (
     e.key === "F12" ||
@@ -202,25 +211,43 @@ swiper2.on('slideChangeTransitionStart', function () {
   swiper1.slideToLoop(currentRealIndex);
 });
 
-let userInteracted = false;
+// Ensure all videos are muted and paused before anything
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("video.trailer").forEach(video => {
+    video.muted = true;
+    video.pause();
+  });
+});
 
-function unmuteActiveVideo() {
-  if (userInteracted) return;
+let userInteracted = false;
+let pageFullyLoaded = false;
+
+function unmuteAndPlayActiveVideo() {
+  if (userInteracted || !pageFullyLoaded) return;
+
   userInteracted = true;
 
-  const videos = document.querySelectorAll('video.trailer');
+  const videos = document.querySelectorAll("video.trailer");
   const activeVideo = videos[swiper1.realIndex];
+
   if (activeVideo) {
     activeVideo.muted = false;
     activeVideo.play().catch(() => {});
   }
-  window.removeEventListener('touchstart', unmuteActiveVideo);
-  window.removeEventListener('click', unmuteActiveVideo);
+
+  window.removeEventListener("touchstart", unmuteAndPlayActiveVideo);
+  window.removeEventListener("click", unmuteAndPlayActiveVideo);
 }
 
-// Listen once for user interaction anywhere
-window.addEventListener('touchstart', unmuteActiveVideo, { once: true });
-window.addEventListener('click', unmuteActiveVideo, { once: true });
+// After page is fully loaded
+window.addEventListener("load", function () {
+  pageFullyLoaded = true;
+
+  // Now wait for user's touch or click
+  window.addEventListener("touchstart", unmuteAndPlayActiveVideo, { once: true });
+  window.addEventListener("click", unmuteAndPlayActiveVideo, { once: true });
+});
+
 // function updateVideoPlayback() {
 //   const activeRealIndex = swiper1.realIndex;
 //   document.querySelectorAll('video.trailer').forEach((video, index) => {
@@ -701,7 +728,6 @@ function HomeReturn() {
   });
 }
 
-
 //Mix Genre
 const newMovie = document.querySelector('.NewMovie');
 const movieData = watchMovie[0];
@@ -733,9 +759,14 @@ function renderNewMovie(index) {
         ${
           index === 0
             ? `<iframe class="w-full h-[50vh] object-contain" src="${movieData.movie[index]}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
-            : `<video id="player" playsinline webkit-playsinline controls class="w-full h-[50vh] object-contain">
-                <source src="${movieData.movie[index]}" type="video/mp4" />
-              </video>`
+            : `<div class="w-full h-auto relative flex justify-center items-center fullScreen"> 
+                  <video id="player" playsinline webkit-playsinline  preload="auto" autoplay="" class="myVideoPlayer w-full h-[50vh] object-contain relative" >
+                    <source src="${movieData.movie[index]}" type="video/mp4" />
+                  </video> 
+                  <div class="video-overlay absolute inset-0 z-50 bg-black"></div>
+                  <button class="screenButton" style="position: absolute; bottom: 0px;right: 0px; width: 40px; height: 40px; background: transparent; border: none; border-radius: 4px; color: white; cursor: pointer; z-index: 120;"></button>
+                  <i class="fa-solid fa-spinner fa-spin z-100 play-icon absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[30px] opacity-70 pointer-events-none"></i>
+               </div>`
         }
       </div>
       <div class='w-full h-auto flex gap-6'>
@@ -776,10 +807,45 @@ function renderNewMovie(index) {
       </div>
     </div>
     <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return'>Return</button>
-
   `;
+  const isIframe = index === 0;
 
-  if (index !== 0) {
+  if (!isIframe) {
+    const fullScreenVideo = document.querySelector('.fullScreen video');
+    const playIcon = document.querySelector('.play-icon');
+    const overlay = document.querySelector('.video-overlay');
+
+    if (fullScreenVideo && playIcon && overlay) {
+      fullScreenVideo.load();
+
+      // Spinner and overlay visible while loading
+      overlay.style.display = 'block';
+      playIcon.classList.add('fa-spinner', 'fa-spin');
+      playIcon.style.opacity = '0.7';
+
+      fullScreenVideo.addEventListener('canplay', () => {
+        overlay.style.display = 'none';
+        playIcon.style.opacity = '0';
+        playIcon.classList.remove('fa-spinner', 'fa-spin');
+      });
+
+      fullScreenVideo.addEventListener('play', () => {
+        playIcon.style.opacity = '0';
+      });
+
+      fullScreenVideo.addEventListener('pause', () => {
+        playIcon.style.opacity = '0.7';
+      });
+    }
+
+    const screenButton = document.querySelector('.screenButton');
+    screenButton?.addEventListener('click', () => {
+      if (fullScreenVideo.webkitEnterFullscreen) {
+        fullScreenVideo.webkitEnterFullscreen();
+      } else if (fullScreenVideo.requestFullscreen) {
+        fullScreenVideo.requestFullscreen();
+      }
+    });
 
     const player = new Plyr('#player', {
       controls: ['play', 'rewind', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
@@ -788,20 +854,25 @@ function renderNewMovie(index) {
 
     setTimeout(() => {
       const controls = document.querySelector('.plyr__controls');
-      if (!controls) return console.warn('Controls not loaded');
+      if (!controls) return;
+
       const backBtn = document.createElement('button');
       backBtn.innerHTML = '⏪<br><small>10</small>';
       backBtn.className = 'plyr__control';
       backBtn.onclick = () => player.currentTime -= 10;
+
       const forwardBtn = document.createElement('button');
       forwardBtn.innerHTML = '⏩<br><small>10</small>';
       forwardBtn.className = 'plyr__control';
       forwardBtn.onclick = () => player.currentTime += 10;
+
       const volumeBtn = controls.querySelector('[data-plyr="mute"]');
       controls.insertBefore(backBtn, volumeBtn);
       controls.insertBefore(forwardBtn, volumeBtn.nextSibling);
     }, 300);
   }
+
+  
 
   setTimeout(() => {
     if (document.querySelector('.swiper3')) {
@@ -956,9 +1027,14 @@ function renderActionMovie(index) {
   movie.innerHTML = `
     <div class='flex flex-col gap-12 w-full h-auto'>
       <div class='w-full h-auto'>
-        <video id="player" playsinline webkit-playsinline controls class="w-full h-[50vh] object-contain">
+      <div class="w-full h-auto relative flex justify-center items-center fullScreen"> 
+        <video id="player" playsinline webkit-playsinline  preload="auto" autoplay="" class="myVideoPlayer w-full h-[50vh] object-contain relative" >
           <source src="${movieDataAction.movie[index]}" type="video/mp4" />
-        </video>
+        </video> 
+        <div class="video-overlay absolute inset-0 z-50 bg-black"></div>
+        <button class="screenButton" style="position: absolute; bottom: 0px;right: 0px; width: 40px; height: 40px; background: transparent; border: none; border-radius: 4px; color: white; cursor: pointer; z-index: 120;"></button>
+        <i class="fa-solid fa-spinner fa-spin z-100 play-icon absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[30px] opacity-70 pointer-events-none"></i>
+      </div>
       </div>
       <div class='w-full h-auto flex gap-6'>
         <div class='flex flex-col gap-3 w-[220px]'>
@@ -999,9 +1075,43 @@ function renderActionMovie(index) {
     </div>
     <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return2'>Return</button>
   `;
+  const fullScreenVideo = document.querySelector('.fullScreen video')
+  const playIcon = document.querySelector('.play-icon');
+  const overlay = document.querySelector('.video-overlay');
 
+  if (fullScreenVideo && playIcon && overlay) {
+    fullScreenVideo.load();
 
-    const player = new Plyr('#player', {
+    // Spinner and overlay visible while loading
+    overlay.style.display = 'block';
+    playIcon.classList.add('fa-spinner', 'fa-spin');
+    playIcon.style.opacity = '0.7';
+
+    fullScreenVideo.addEventListener('canplay', () => {
+      overlay.style.display = 'none';
+      playIcon.style.opacity = '0';
+      playIcon.classList.remove('fa-spinner', 'fa-spin');
+    });
+
+    fullScreenVideo.addEventListener('play', () => {
+      playIcon.style.opacity = '0';
+    });
+
+    fullScreenVideo.addEventListener('pause', () => {
+      playIcon.style.opacity = '0.7';
+    });
+  }
+  const screenButton = document.querySelector('.screenButton')
+  screenButton.addEventListener('click', () => {
+      if (fullScreenVideo.webkitEnterFullscreen) {
+        fullScreenVideo.webkitEnterFullscreen();
+      } else if (fullScreenVideo.requestFullscreen) {
+        fullScreenVideo.requestFullscreen();
+      } else if (container.requestFullscreen) {
+        container.requestFullscreen();
+      }
+  })
+   const player = new Plyr('#player', {
       controls: ['play', 'rewind', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
       invertTime: false,
     });
@@ -1173,12 +1283,17 @@ function renderHorrorMovie(index) {
   movie.style.display = 'grid';
 
   movie.innerHTML = `
-      <div class='flex flex-col gap-12 w-full h-auto'>
-    <div class='w-full h-auto'>
-      <video id="player" playsinline webkit-playsinline controls class="w-full h-[50vh] object-contain">
-        <source src="${movieDataHorror.movie[index]}" type="video/mp4" />
-      </video>
-    </div>
+    <div class='flex flex-col gap-12 w-full h-auto'>
+      <div class='w-full h-auto'>
+        <div class="w-full h-auto relative flex justify-center items-center fullScreen"> 
+          <video id="player" playsinline webkit-playsinline  preload="auto" autoplay="" class="myVideoPlayer w-full h-[50vh] object-contain relative" >
+            <source src="${movieDataHorror.movie[index]}" type="video/mp4" />
+          </video> 
+          <div class="video-overlay absolute inset-0 z-50 bg-black"></div>
+          <button class="screenButton" style="position: absolute; bottom: 0px;right: 0px; width: 40px; height: 40px; background: transparent; border: none; border-radius: 4px; color: white; cursor: pointer; z-index: 120;"></button>
+          <i class="fa-solid fa-spinner fa-spin z-100 play-icon absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[30px] opacity-70 pointer-events-none"></i>
+        </div>
+      </div>
     <div class='w-full h-auto flex gap-6'>
       <div class='flex flex-col gap-3 w-[220px]'>
         <div class='w-full h-[220px]'>
@@ -1219,6 +1334,42 @@ function renderHorrorMovie(index) {
   <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return3'>Return</button>
 
   `;
+  const fullScreenVideo = document.querySelector('.fullScreen video')
+  const playIcon = document.querySelector('.play-icon');
+  const overlay = document.querySelector('.video-overlay');
+
+  if (fullScreenVideo && playIcon && overlay) {
+    fullScreenVideo.load();
+
+    // Spinner and overlay visible while loading
+    overlay.style.display = 'block';
+    playIcon.classList.add('fa-spinner', 'fa-spin');
+    playIcon.style.opacity = '0.7';
+
+    fullScreenVideo.addEventListener('canplay', () => {
+      overlay.style.display = 'none';
+      playIcon.style.opacity = '0';
+      playIcon.classList.remove('fa-spinner', 'fa-spin');
+    });
+
+    fullScreenVideo.addEventListener('play', () => {
+      playIcon.style.opacity = '0';
+    });
+
+    fullScreenVideo.addEventListener('pause', () => {
+      playIcon.style.opacity = '0.7';
+    });
+  }
+  const screenButton = document.querySelector('.screenButton')
+  screenButton.addEventListener('click', () => {
+      if (fullScreenVideo.webkitEnterFullscreen) {
+        fullScreenVideo.webkitEnterFullscreen();
+      } else if (fullScreenVideo.requestFullscreen) {
+        fullScreenVideo.requestFullscreen();
+      } else if (container.requestFullscreen) {
+        container.requestFullscreen();
+      }
+  })
 
 
     const player = new Plyr('#player', {
@@ -1640,8 +1791,14 @@ function performSearch(movieName) {
           ${
             index === 0 ?
             `<iframe class="w-full h-[50vh] object-contain" src="${clickedMovie.movie}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
-            : `<video id="player" playsinline="" webkit-playsinline="" controls class="w-full h-[50vh] object-contain">
-            <source src="${clickedMovie.movie}" type="video/mp4" /></video>`
+            : `<div class="w-full h-auto relative flex justify-center items-center fullScreen"> 
+                  <video id="player" playsinline webkit-playsinline  preload="auto" autoplay="" class="myVideoPlayer w-full h-[50vh] object-contain relative" >
+                    <source src="${clickedMovie.movie}" type="video/mp4" />
+                  </video> 
+                  <div class="video-overlay absolute inset-0 z-50 bg-black"></div>
+                  <button class="screenButton" style="position: absolute; bottom: 0px;right: 0px; width: 40px; height: 40px; background: transparent; border: none; border-radius: 4px; color: white; cursor: pointer; z-index: 120;"></button>
+                  <i class="fa-solid fa-spinner fa-spin z-100 play-icon absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[30px] opacity-70 pointer-events-none"></i>
+                </div>`
           }
         </div>
         <div class='w-full h-auto flex gap-6'>
@@ -1680,6 +1837,45 @@ function performSearch(movieName) {
       </div>
       <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return4'>Return</button>
     `;
+  const isIframe = index === 0;
+  if (!isIframe) {
+    const fullScreenVideo = document.querySelector('.fullScreen video')
+    const playIcon = document.querySelector('.play-icon');
+    const overlay = document.querySelector('.video-overlay');
+
+    if (fullScreenVideo && playIcon && overlay) {
+      fullScreenVideo.load();
+
+      // Spinner and overlay visible while loading
+      overlay.style.display = 'block';
+      playIcon.classList.add('fa-spinner', 'fa-spin');
+      playIcon.style.opacity = '0.7';
+
+      fullScreenVideo.addEventListener('canplay', () => {
+        overlay.style.display = 'none';
+        playIcon.style.opacity = '0';
+        playIcon.classList.remove('fa-spinner', 'fa-spin');
+      });
+
+      fullScreenVideo.addEventListener('play', () => {
+        playIcon.style.opacity = '0';
+      });
+
+      fullScreenVideo.addEventListener('pause', () => {
+        playIcon.style.opacity = '0.7';
+      });
+    }
+    const screenButton = document.querySelector('.screenButton')
+    screenButton.addEventListener('click', () => {
+        if (fullScreenVideo.webkitEnterFullscreen) {
+          fullScreenVideo.webkitEnterFullscreen();
+        } else if (fullScreenVideo.requestFullscreen) {
+          fullScreenVideo.requestFullscreen();
+        } else if (container.requestFullscreen) {
+          container.requestFullscreen();
+        }
+    })
+  }
 
   if (index != 0)    {
     const player = new Plyr('#player', {
@@ -1942,8 +2138,14 @@ searchInput.addEventListener('keydown', (e) => {
               ${
             index === 0 ?
             `<iframe class="w-full h-[50vh] object-contain" src="${clickedMovie.movie}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
-            : `<video id="player" playsinline="" webkit-playsinline="" controls class="w-full h-[50vh] object-contain">
-            <source src="${clickedMovie.movie}" type="video/mp4" /></video>`
+            :  `<div class="w-full h-auto relative flex justify-center items-center fullScreen"> 
+                  <video id="player" playsinline webkit-playsinline  preload="auto" autoplay="" class="myVideoPlayer w-full h-[50vh] object-contain relative" >
+                    <source src="${clickedMovie.movie}" type="video/mp4" />
+                  </video> 
+                  <div class="video-overlay absolute inset-0 z-50 bg-black"></div>
+                  <button class="screenButton" style="position: absolute; bottom: 0px;right: 0px; width: 40px; height: 40px; background: transparent; border: none; border-radius: 4px; color: white; cursor: pointer; z-index: 120;"></button>
+                  <i class="fa-solid fa-spinner fa-spin z-100 play-icon absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[30px] opacity-70 pointer-events-none"></i>
+                </div>`
           }
           </div>
           <div class='w-full h-auto flex gap-6'>
@@ -1982,6 +2184,45 @@ searchInput.addEventListener('keydown', (e) => {
         </div>
         <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return4'>Return</button>
       `;
+  const isIframe = index === 0;
+  if (!isIframe) {
+    const fullScreenVideo = document.querySelector('.fullScreen video')
+    const playIcon = document.querySelector('.play-icon');
+    const overlay = document.querySelector('.video-overlay');
+
+    if (fullScreenVideo && playIcon && overlay) {
+      fullScreenVideo.load();
+
+      // Spinner and overlay visible while loading
+      overlay.style.display = 'block';
+      playIcon.classList.add('fa-spinner', 'fa-spin');
+      playIcon.style.opacity = '0.7';
+
+      fullScreenVideo.addEventListener('canplay', () => {
+        overlay.style.display = 'none';
+        playIcon.style.opacity = '0';
+        playIcon.classList.remove('fa-spinner', 'fa-spin');
+      });
+
+      fullScreenVideo.addEventListener('play', () => {
+        playIcon.style.opacity = '0';
+      });
+
+      fullScreenVideo.addEventListener('pause', () => {
+        playIcon.style.opacity = '0.7';
+      });
+    }
+    const screenButton = document.querySelector('.screenButton')
+    screenButton.addEventListener('click', () => {
+        if (fullScreenVideo.webkitEnterFullscreen) {
+          fullScreenVideo.webkitEnterFullscreen();
+        } else if (fullScreenVideo.requestFullscreen) {
+          fullScreenVideo.requestFullscreen();
+        } else if (container.requestFullscreen) {
+          container.requestFullscreen();
+        }
+    })
+  }
 
       
 if (index != 0)    {
@@ -2126,8 +2367,9 @@ searchInput2.addEventListener('input', () => {
   suggestionBox2.innerHTML = '';
   
   
-  suggestionBox2.style.position = 'fixed';
-  suggestionBox2.style.top = '100px';
+  
+  suggestionBox2.style.top = '50px';
+  suggestionBox2.style.padding = '5px'
   suggestionBox2.style.height = '120px';
   
   if (value === '') {

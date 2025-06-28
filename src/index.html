@@ -11,12 +11,278 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
 </head>
-<body class="w-full h-auto overflow-x-hidden bg-black relative flex flex-col items-center">
+
+<body class="w-full h-auto overflow-x-hidden bg-black relative flex-col items-center">
+    <div id="loader" class="fixed  flex-col gap-4 w-full h-screen flex justify-center items-center overflow-hidden">
+        <!-- From Uiverse.io by kennyotsu --> 
+         <!-- From Uiverse.io by ZacharyCrespin --> 
+        <div class="loader2">
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+        </div>
+        <div class="card">
+        <div class="loader">
+            <p>loading</p>
+            <div class="words">
+                <span class="word">Optimization</span>
+                <span class="word">Framework</span>
+                <span class="word">Deployment</span>
+                <span class="word">Integration</span>
+                <span class="word">Scalability</span>
+                <span class="word">Components</span>
+                <span class="word">UX</span>
+                <span class="word">Performance</span>
+                <span class="word">Versioning</span>
+
+            </div>
+        </div>
+        </div>
+    </div>
+    
     <style>
+        @keyframes square-animation {
+        0% {
+        left: 0;
+        top: 0;
+        }
+
+        10.5% {
+        left: 0;
+        top: 0;
+        }
+
+        12.5% {
+        left: 32px;
+        top: 0;
+        }
+
+        23% {
+        left: 32px;
+        top: 0;
+        }
+
+        25% {
+        left: 64px;
+        top: 0;
+        }
+
+        35.5% {
+        left: 64px;
+        top: 0;
+        }
+
+        37.5% {
+        left: 64px;
+        top: 32px;
+        }
+
+        48% {
+        left: 64px;
+        top: 32px;
+        }
+
+        50% {
+        left: 32px;
+        top: 32px;
+        }
+
+        60.5% {
+        left: 32px;
+        top: 32px;
+        }
+
+        62.5% {
+        left: 32px;
+        top: 64px;
+        }
+
+        73% {
+        left: 32px;
+        top: 64px;
+        }
+
+        75% {
+        left: 0;
+        top: 64px;
+        }
+
+        85.5% {
+        left: 0;
+        top: 64px;
+        }
+
+        87.5% {
+        left: 0;
+        top: 32px;
+        }
+
+        98% {
+        left: 0;
+        top: 32px;
+        }
+
+        100% {
+        left: 0;
+        top: 0;
+        }
+        }
+
+        .loader2 {
+            scale: 1.3;
+            position: relative;
+            width: 96px;
+            height: 96px;
+            transform: rotate(45deg);
+        }
+
+        .loader-square {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 28px;
+        height: 28px;
+        margin: 2px;
+        border-radius: 0px;
+        background: rgb(129, 8, 8);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        animation: square-animation 10s ease-in-out infinite both;
+        }
+
+        .loader-square:nth-of-type(0) {
+        animation-delay: 0s;
+        }
+
+        .loader-square:nth-of-type(1) {
+        animation-delay: -1.4285714286s;
+        }
+
+        .loader-square:nth-of-type(2) {
+        animation-delay: -2.8571428571s;
+        }
+
+        .loader-square:nth-of-type(3) {
+        animation-delay: -4.2857142857s;
+        }
+
+        .loader-square:nth-of-type(4) {
+        animation-delay: -5.7142857143s;
+        }
+
+        .loader-square:nth-of-type(5) {
+        animation-delay: -7.1428571429s;
+        }
+
+        .loader-square:nth-of-type(6) {
+        animation-delay: -8.5714285714s;
+        }
+
+        .loader-square:nth-of-type(7) {
+        animation-delay: -10s;
+        }
+        /* From Uiverse.io by kennyotsu */ 
+        .loader {
+        color: rgb(124, 124, 124);
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-size: 19px;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+        height: 40px;
+        padding: 10px 10px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        border-radius: 8px;
+        }
+
+        .words {
+        overflow: hidden;
+        position: relative;
+        }
+        .words::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            var(--bg-color) 10%,
+            transparent 30%,
+            transparent 70%,
+            var(--bg-color) 90%
+        );
+        z-index: 20;
+        }
+
+        .word {
+        display: block;
+        height: 100%;
+        padding-left: 6px;
+        color: #8a0d34;
+        animation: spin_4991 4s infinite;
+        }
+
+        @keyframes spin_4991 {
+        10% {
+            -webkit-transform: translateY(-102%);
+            transform: translateY(-102%);
+        }
+
+        25% {
+            -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+        }
+
+        35% {
+            -webkit-transform: translateY(-202%);
+            transform: translateY(-202%);
+        }
+
+        50% {
+            -webkit-transform: translateY(-200%);
+            transform: translateY(-200%);
+        }
+
+        60% {
+            -webkit-transform: translateY(-302%);
+            transform: translateY(-302%);
+        }
+
+        75% {
+            -webkit-transform: translateY(-300%);
+            transform: translateY(-300%);
+        }
+
+        85% {
+            -webkit-transform: translateY(-402%);
+            transform: translateY(-402%);
+        }
+
+        100% {
+            -webkit-transform: translateY(-400%);
+            transform: translateY(-400%);
+        }
+        }
+
+        
         * {
             overscroll-behavior: none;
         }
+        body.fullscreen-video-playing *:not(video) {
+            display: none;
+        }
+
         body, html {
             width: 100%;
             height: 100%;
@@ -229,11 +495,13 @@
             top: -20px;
         }
     </style>
+    
     <!-- <div class="sidebar absolute right-0 w-[7px] h-full overflow-hidden">
         <div class="slidebar fixed w-full z-[90] h-[170px] overflow-hidden">
             <div class="fluid-bar w-full h-full animate-fluidMove bg-gradient-to-b from-[#cb0738] to-[#7e031f] blur-[1px] rounded-[20px]"></div>
         </div>
     </div> -->
+<div id="mainBody" class="">
     <div class="fixed w-full bottom-0 bg-[#590303] z-[1203] justify-center items-center edit sm:flex hidden">
         <div class="font-[GM] font-bold p-3 gap-4 w-[880px] max-w-[950px] text-[0.9rem] bg-[#590303] rounded-t-[20px] h-[40px] z-[1200] text-white justify-evenly items-center sm:flex hidden">
             <span class="w-[280px] h-[40px] flex items-center relative border-b border-white z-[1200]">
@@ -331,8 +599,8 @@
             <span class="atw">About-This-Website</span>
             <span class="Donate">Donate</span>
         </div>
-        <div class="font-[GM] font-bold p-3 gap-4 w-full max-w-[950px] text-[0.9rem] bg-[#590303] h-[40px] z-[1200] text-white justify-evenly items-center flex sm:hidden srchAppear">
-            <div class="w-[840px] h-[40px] flex items-center justify-center relative border-b border-white z-[1200]">
+        <div class="font-[GM] relative font-bold p-3 gap-4 w-full max-w-[950px] text-[0.9rem] bg-[#590303] h-[40px] z-[1200] text-white justify-evenly items-center flex sm:hidden srchAppear">
+            <div class="w-full h-[40px] flex items-center justify-center relative border-b border-white z-[1200]">
                 <div class="z-[1200] relative flex gap-1 h-full w-full items-center">
                     <i class="fa-solid fa-magnifying-glass" class="text-red-700 absolute left-0"></i>
                     <input
@@ -343,12 +611,12 @@
                         class="w-full h-full text-white font-bold px-2 placeholder-gray-300 outline-none focus:outline-none z-[1200]"
                     />
                 </div>
-                <ul id="suggestions2" class="suggestion-box2 z-[-2] flex flex-col gap-2 w-[100%]" style="
+                <ul id="suggestions2" class="suggestion-box2 z-[-2] flex flex-col gap-2 w-full" style="
                     list-style: none;
-                    padding: 0;
+                    padding: 0px;
                     margin: -12px;
-                    top: 100px;
-                    position: fixed;
+                    top: 50px;
+                    position: absolute;
                     height: 0px;
                     max-height: 120px;
                     overflow-y: auto;
@@ -458,7 +726,7 @@
         </div>    
     </div>
     <div class="movie max-w-[1200px] w-full sm:max-h-[140vh] p-3 max-h-[240vh] h-auto bg-black relative hidden gap-3 grid-layout"></div>
-    
+</div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
