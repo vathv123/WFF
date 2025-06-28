@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=false">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Movie/src/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+</head>
+<body class="w-full h-auto overflow-x-hidden bg-black relative flex flex-col items-center">
+    <!-- <div class="sidebar absolute right-0 w-[7px] h-full overflow-hidden">
+        <div class="slidebar fixed w-full z-[90] h-[170px] overflow-hidden">
+            <div class="fluid-bar w-full h-full animate-fluidMove bg-gradient-to-b from-[#cb0738] to-[#7e031f] blur-[1px] rounded-[20px]"></div>
+        </div>
+    </div> -->
+    <div class="fixed w-full bottom-0 bg-[#590303] z-[1203] justify-center items-center edit sm:flex hidden">
+        <div class="font-[GM] font-bold p-3 gap-4 w-[880px] max-w-[950px] text-[0.9rem] bg-[#590303] rounded-t-[20px] h-[40px] z-[1200] text-white justify-evenly items-center sm:flex hidden">
+            <span class="w-[280px] h-[40px] flex items-center relative border-b border-white z-[1200]">
+                <div class="z-[1200] relative flex gap-1 bg-[#590303] h-full w-full items-center">
+                    <i class="fa-solid fa-magnifying-glass" class="text-red-700 absolute left-0"></i>
+                    <input
+                        type="text"
+                        id="search"
+                        placeholder="Search"
+                        autocomplete="off"
+                        class="w-full h-full text-white font-bold px-2 placeholder-gray-300 outline-none focus:outline-none z-[1200]"
+                    />
+                </div>
+                <ul id="suggestions" class="suggestion-box z-[-1]" style="
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    top: 0px;
+                    position: absolute;
+                    width: 100%;
+                    height: 0px;
+                    max-height: 120px;
+                    overflow-y: auto;
+                    background: #400202;
+                    border-radius: 20px 0px 0 0;
+                    transition: top 1s ease, height 0.7s ease; ">
+                </ul>
+            </span>
+            <a href="#New" class="smooth-link text-white">Mix Genre</a>
+            <a href="#Action" class="smooth-link text-white">Action</a>
+            <a href="#Comedy" class="smooth-link text-white">Comedy</a>
+            <a href="#Adventure" class="smooth-link text-white">Adventure</a>
+            <a href="#Animation" class="smooth-link text-white">Animation</a>
+            <a href="#Romance" class="smooth-link text-white">Romance</a>
+            <a href="#Horror" class="smooth-link text-white">Horror</a>
+        </div>
+    </div>
+
+    <div class="fixed inset-0 z-[1300] items-center justify-center ABA opacity-0 hidden">
+        <div class="bg-black/90 text-red-900 border border-red-800 rounded-2xl shadow-xl p-6 flex gap-6 items-center max-w-[800px]">
+            <img src="img/ABA.png" alt="Support" class="w-[200px] h-[200px] object-contain drop-shadow-lg">
+            <div class="space-y-3 sm:block hidden">
+                <h2 class="text-3xl font-bold text-red-900 font-[Script]">Support Us with a Donation</h2>
+                <p class="text-sm text-red-900 leading-relaxed max-w-[350px]">
+                    This website is completely free and created with love for movie lovers. If you enjoy the content, any donation — big or small — is truly appreciated. Your support keeps the site alive and helps us grow. Thank you!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="fixed inset-0 z-[1300] items-center justify-center p-4 aboutThisWebsite opacity-0 hidden">
+        <div class="bg-black/90 text-red-600 border border-red-800 rounded-2xl shadow-2xl p-6 flex flex-col justify-center md:flex-row gap-6 items-center max-w-[900px] w-full">
+            <div class="flex flex-col gap-6">
+                <h2 class="text-3xl font-bold ml-3 text-red-900 font-[Script]">ABTM</h2>
+                <div class="grid grid-cols-5 gap-3 w-[350px] h-auto">
+                    <div class="col-span-4 bg-red-500 flex items-center justify-center text-white font-bold h-[140px]">
+                        <img src="https://i.pinimg.com/736x/e1/b1/94/e1b1946e9dcc687743ca954bf31949a0.jpg" alt="" class="w-full h-full object-cover object-center">
+                    </div>
+                    <div class="col-span-1 bg-white h-[120px] flex items-center justify-center border border-gray-300">
+                        <img src="https://i.pinimg.com/736x/04/fe/fc/04fefcb312ffd19f9ff2ca771e056554.jpg" alt="" class="w-full h-full object-cover object-center">
+                    </div>
+                    <div class="col-span-2 bg-white h-[120px] flex items-center justify-center border border-gray-300">
+                        <img src="https://i.pinimg.com/736x/95/ca/08/95ca089d47f48e502992406cc814db54.jpg" alt="" class="w-full h-full object-cover ">
+                    </div>
+                    <div class="col-span-3 bg-white h-24 flex items-center justify-center border border-gray-300">
+                        <img src="https://i.pinimg.com/736x/35/aa/22/35aa22841fde3b5e4e5a439545250c2d.jpg" alt="" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <!-- <img src="https://www.icegif.com/wp-content/uploads/2023/06/icegif-202.gif" alt=""  class="w-[240px] h-full object-contain drop-shadow-lg"> -->
+            <div class="space-y-4 font-[GM]">
+                <p class="text-[15px] text-red-900 leading-relaxed max-w-full md:max-w-[500px]">
+                    I created this website out of pure love for cinema and storytelling. As a movie lover, I wanted a safe place for anyone to watch Khmer movies — no viruses, no annoying ads, no fees.
+                </p>
+                <p class="text-[15px] text-red-900 leading-relaxed max-w-full md:max-w-[500px]">
+                    This site now has over 100 movies. It took weeks of dedication, learning, testing, and building everything from scratch — from the video system to the full layout — all done with care.
+                </p>
+                <p class="text-[15px] text-red-900 leading-relaxed max-w-full md:max-w-[500px]">
+                    My goal is to keep this platform free, enjoyable, and always improving. If you’d like to support this project, your donation helps keep the site alive and motivates me to continue.
+                </p>
+                <p class="text-[14px] italic text-red-900">Thank you for visiting and being part of this journey</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="fixed w-full p-5 top-0 left-0 text-white z-[1500] flex justify-between flex-wrap">
+        <p class="text-[1.2rem] font-bold text-[#cb0738]" style="font-family: 'Style Script', cursive;">WFF &ndash; Movies</p>
+        <div class="flex gap-[24px] cursor-pointer text-[#cb0738] font-[GM] sm:hidden">
+            <span><a target="_self" href="#New" class="smooth-link Home1">Home</a></span>
+            <span class="Donate1">Donate</span>
+        </div>
+        <div class="gap-[24px] cursor-pointer text-[#cb0738] font-[GM] sm:flex hidden">
+            <span><a target="_self" href="#New" class="smooth-link Home">Home</a></span>
+            <span><a target="_self" href="#New" class="smooth-link">Get started</a></span>
+            <span class="atw">About-This-Website</span>
+            <span class="Donate">Donate</span>
+        </div>
+        <div class="font-[GM] font-bold p-3 gap-4 w-full max-w-[950px] text-[0.9rem] bg-[#590303] h-[40px] z-[1200] text-white justify-evenly items-center flex sm:hidden srchAppear">
+            <div class="w-[840px] h-[40px] flex items-center justify-center relative border-b border-white z-[1200]">
+                <div class="z-[1200] relative flex gap-1 h-full w-full items-center">
+                    <i class="fa-solid fa-magnifying-glass" class="text-red-700 absolute left-0"></i>
+                    <input
+                        type="text"
+                        id="search2"
+                        placeholder="Search"
+                        autocomplete="off"
+                        class="w-full h-full text-white font-bold px-2 placeholder-gray-300 outline-none focus:outline-none z-[1200]"
+                    />
+                </div>
+                <ul id="suggestions2" class="suggestion-box2 z-[-2] flex flex-col gap-2 w-[100%]" style="
+                    list-style: none;
+                    padding: 0;
+                    margin: -12px;
+                    top: 100px;
+                    position: fixed;
+                    height: 0px;
+                    max-height: 120px;
+                    overflow-y: auto;
+                    background: #400202;
+                    transition: top 1s ease, height 1s ease; ">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main w-full h-auto flex flex-col items-center">
+        <div class="max-w-[1190px] w-full headerPart h-auto flex flex-col sm:fixed sm:top-0">
+            <div class="swiper1 w-full h-[100vh] relative overflow-hidden">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide fashion-slide flex justify-center items-start slideShowMain overflow-hidden" data-code="1"></div>
+                    <div class="swiper-slide fashion-slide flex justify-center items-start slideShowMain overflow-hidden" data-code="2"></div>
+                    <div class="swiper-slide fashion-slide flex justify-center items-start slideShowMain overflow-hidden" data-code="3"></div>
+                    <div class="swiper-slide fashion-slide flex justify-center items-start slideShowMain overflow-hidden" data-code="4"></div>
+                    <div class="swiper-slide fashion-slide flex justify-center items-start slideShowMain overflow-hidden" data-code="5"></div>
+                    <div class="swiper-slide fashion-slide flex justify-center items-start slideShowMain overflow-hidden" data-code="6"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper2 absolute sm:right-0 bottom-0 w-[490px] max-[450px]:w-full max-[450px]:h-[190px] h-[230px] overflow-hidden z-3" style="will-change: clip-path;">
+                    <div class="swiper-wrapper z-[120]">
+                        <div class="swiper-slide fashion-slide flex justify-center items-center slideShow" data-code="1"></div>
+                        <div class="swiper-slide fashion-slide flex justify-center items-center slideShow" data-code="2"></div>
+                        <div class="swiper-slide fashion-slide flex justify-center items-center slideShow" data-code="3"></div>
+                        <div class="swiper-slide fashion-slide flex justify-center items-center slideShow" data-code="4"></div>
+                        <div class="swiper-slide fashion-slide flex justify-center items-center slideShow" data-code="5"></div>
+                        <div class="swiper-slide fashion-slide flex justify-center items-center slideShow" data-code="6"></div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+        <div class="h-[100vh] w-full bg-transparent hidden sm:block"></div>
+        <div class="mainPart relative max-w-[1210px] w-full h-[100vh] max-h-[100vh] flex flex-col bg-black z-[120]">
+            <div class="sticky top-[120px] p-4 pt-12 flex flex-col gap-6 w-full h-auto bg-black listofall">
+                <div class="flex flex-col gap-6">
+                    <div class="flex gap-6 flex-wrap h-auto w-full z-[250]">
+                        <span class="lists" id="New">New Update</span>
+                        <span class="list" id="MG">Mix Genre</span>
+                        <!-- <div class="gap-6 flex-wrap flex sticky top-0">
+                            <span class="list">Action</span>
+                            <span class="list">Comedy</span>
+                            <span class="list">Romance</span>
+                            <span class="list">Horror</span>
+                            <span class="list">Drama</span>
+                            <span class="list">Thriller</span>
+                            <span class="list">Adventure</span>
+                            <span class="list">Animation</span>
+                        </div> -->
+                    </div>
+                    <div class="NewMovie grid gap-[32px] w-full h-auto z-[12000] grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 text-white"></div>
+                    <div class="flex gap-6">
+                        <p class="lists" id="Action">Action</p>
+                        <span class="list" id="Comedy">Comedy</span>
+                        <span class="list" id="Animation">Animation</span>
+                        <span class="list" id="Adventure">Adventure</span>
+                    </div>
+                    <div class="Action h-auto grid gap-[32px] w-full z-[12000] grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 text-white"></div>
+                    <div class="flex gap-6">
+                        <p class="lists" id="Horror">Horror Movie</p>
+                        <span class="list">Thriller</span>
+                    </div>
+                    <div class="Horror h-auto grid pt-4 mt-12 gap-[32px] w-full z-[12000] grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 text-white"></div>
+                     <div class="w-full flex justify-between">
+                         <div class="flex flex-col gap-4 text-white">
+                             <div>
+                                <p class="text-[2rem] setCapV2">Contact Me</p>
+                                <p> Email: <span><u>imboravath@gmail.com</u></span> </p>
+                                <p> Github: <span><u><a href="https://github.com/vathv123">ravath.com</a></u></span> </p>
+                                <p> Phone: <span><i>+855 61 818 077</i></span></p>
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="https://www.facebook.com/share/15dTTrhDcd/" target="_self"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.6em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><path d="M13.001 19.9381C16.9473 19.446 20.001 16.0796 20.001 12C20.001 7.58172 16.4193 4 12.001 4C7.5827 4 4.00098 7.58172 4.00098 12C4.00098 16.0796 7.05467 19.446 11.001 19.9381V14H9.00098V12H11.001V10.3458C11.001 9.00855 11.1402 8.52362 11.4017 8.03473C11.6631 7.54584 12.0468 7.16216 12.5357 6.9007C12.9184 6.69604 13.3931 6.57252 14.2227 6.51954C14.5519 6.49851 14.9781 6.52533 15.501 6.6V8.5H15.001C14.0837 8.5 13.7052 8.54332 13.4789 8.66433C13.3386 8.73939 13.2404 8.83758 13.1653 8.97793C13.0443 9.20418 13.001 9.42853 13.001 10.3458V12H15.501L15.001 14H13.001V19.9381ZM12.001 22C6.47813 22 2.00098 17.5228 2.00098 12C2.00098 6.47715 6.47813 2 12.001 2C17.5238 2 22.001 6.47715 22.001 12C22.001 17.5228 17.5238 22 12.001 22Z"></path><path d="M13.001 19.9381C16.9473 19.446 20.001 16.0796 20.001 12C20.001 7.58172 16.4193 4 12.001 4C7.5827 4 4.00098 7.58172 4.00098 12C4.00098 16.0796 7.05467 19.446 11.001 19.9381V14H9.00098V12H11.001V10.3458C11.001 9.00855 11.1402 8.52362 11.4017 8.03473C11.6631 7.54584 12.0468 7.16216 12.5357 6.9007C12.9184 6.69604 13.3931 6.57252 14.2227 6.51954C14.5519 6.49851 14.9781 6.52533 15.501 6.6V8.5H15.001C14.0837 8.5 13.7052 8.54332 13.4789 8.66433C13.3386 8.73939 13.2404 8.83758 13.1653 8.97793C13.0443 9.20418 13.001 9.42853 13.001 10.3458V12H15.501L15.001 14H13.001V19.9381ZM12.001 22C6.47813 22 2.00098 17.5228 2.00098 12C2.00098 6.47715 6.47813 2 12.001 2C17.5238 2 22.001 6.47715 22.001 12C22.001 17.5228 17.5238 22 12.001 22Z"></path></svg> </a>
+                                <a href="" target="_self"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.6em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><path d="M12.001 9C10.3436 9 9.00098 10.3431 9.00098 12C9.00098 13.6573 10.3441 15 12.001 15C13.6583 15 15.001 13.6569 15.001 12C15.001 10.3427 13.6579 9 12.001 9ZM12.001 7C14.7614 7 17.001 9.2371 17.001 12C17.001 14.7605 14.7639 17 12.001 17C9.24051 17 7.00098 14.7629 7.00098 12C7.00098 9.23953 9.23808 7 12.001 7ZM18.501 6.74915C18.501 7.43926 17.9402 7.99917 17.251 7.99917C16.5609 7.99917 16.001 7.4384 16.001 6.74915C16.001 6.0599 16.5617 5.5 17.251 5.5C17.9393 5.49913 18.501 6.0599 18.501 6.74915ZM12.001 4C9.5265 4 9.12318 4.00655 7.97227 4.0578C7.18815 4.09461 6.66253 4.20007 6.17416 4.38967C5.74016 4.55799 5.42709 4.75898 5.09352 5.09255C4.75867 5.4274 4.55804 5.73963 4.3904 6.17383C4.20036 6.66332 4.09493 7.18811 4.05878 7.97115C4.00703 9.0752 4.00098 9.46105 4.00098 12C4.00098 14.4745 4.00753 14.8778 4.05877 16.0286C4.0956 16.8124 4.2012 17.3388 4.39034 17.826C4.5591 18.2606 4.7605 18.5744 5.09246 18.9064C5.42863 19.2421 5.74179 19.4434 6.17187 19.6094C6.66619 19.8005 7.19148 19.9061 7.97212 19.9422C9.07618 19.9939 9.46203 20 12.001 20C14.4755 20 14.8788 19.9934 16.0296 19.9422C16.8117 19.9055 17.3385 19.7996 17.827 19.6106C18.2604 19.4423 18.5752 19.2402 18.9074 18.9085C19.2436 18.5718 19.4445 18.2594 19.6107 17.8283C19.8013 17.3358 19.9071 16.8098 19.9432 16.0289C19.9949 14.9248 20.001 14.5389 20.001 12C20.001 9.52552 19.9944 9.12221 19.9432 7.97137C19.9064 7.18906 19.8005 6.66149 19.6113 6.17318C19.4434 5.74038 19.2417 5.42635 18.9084 5.09255C18.573 4.75715 18.2616 4.55693 17.8271 4.38942C17.338 4.19954 16.8124 4.09396 16.0298 4.05781C14.9258 4.00605 14.5399 4 12.001 4ZM12.001 2C14.7176 2 15.0568 2.01 16.1235 2.06C17.1876 2.10917 17.9135 2.2775 18.551 2.525C19.2101 2.77917 19.7668 3.1225 20.3226 3.67833C20.8776 4.23417 21.221 4.7925 21.476 5.45C21.7226 6.08667 21.891 6.81333 21.941 7.8775C21.9885 8.94417 22.001 9.28333 22.001 12C22.001 14.7167 21.991 15.0558 21.941 16.1225C21.8918 17.1867 21.7226 17.9125 21.476 18.55C21.2218 19.2092 20.8776 19.7658 20.3226 20.3217C19.7668 20.8767 19.2076 21.22 18.551 21.475C17.9135 21.7217 17.1876 21.89 16.1235 21.94C15.0568 21.9875 14.7176 22 12.001 22C9.28431 22 8.94514 21.99 7.87848 21.94C6.81431 21.8908 6.08931 21.7217 5.45098 21.475C4.79264 21.2208 4.23514 20.8767 3.67931 20.3217C3.12348 19.7658 2.78098 19.2067 2.52598 18.55C2.27848 17.9125 2.11098 17.1867 2.06098 16.1225C2.01348 15.0558 2.00098 14.7167 2.00098 12C2.00098 9.28333 2.01098 8.94417 2.06098 7.8775C2.11014 6.8125 2.27848 6.0875 2.52598 5.45C2.78014 4.79167 3.12348 4.23417 3.67931 3.67833C4.23514 3.1225 4.79348 2.78 5.45098 2.525C6.08848 2.2775 6.81348 2.11 7.87848 2.06C8.94514 2.0125 9.28431 2 12.001 2Z"></path></svg> </a>
+                                <a href="" target="_self"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" role="img" viewBox="0 0 24 24" height="1.6em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg> </a>
+                                <a href="" target="_self"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" role="img" viewBox="0 0 24 24" height="1.6em" width="1.6em" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg> </a>
+                            </div>
+                         </div>
+                         <div class="text-white">
+                             <p id="resume" class="cursor-pointer"> >>Hire Me!!<< </p>
+                             <p class="max-w-[350px]">
+                                 Thank you for visiting my movie Website. I apologize for any inconveniences as this website is only a part of my portfolio project<br />
+                                 Feel free to reach out if you want to collaborate or have any
+                                 questions!
+                             </p>
+                         </div>
+                    </div>
+                    <div class="w-full h-[50px] bg-white">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="relative searchResult max-w-[1210px] pt-4 w-full h-auto flex-col bg-black z-[120] hidden gap-6">
+                
+            </div>
+        </div>    
+    </div>
+    <div class="movie max-w-[1200px] w-full sm:max-h-[140vh] p-3 max-h-[240vh] h-auto bg-black relative hidden gap-3 grid-layout"></div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
+    <script src="app.js"></script>
+</body>
+</html>
