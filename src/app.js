@@ -29,19 +29,19 @@ let swiper1;
 let swiper2;
 
 const videoSources = [
-  "src/video/HearmeOursummer.mp4",
-  "src/video/Myboo.mp4",
-  "src/video/InvincibleSwordman.mp4",
-  "src/video/ForbiddenZone.mp4",
-  "src/video/Bigworld.mp4",
-  "src/video/PandaPlan.mp4"
+  "video/HearmeOursummer.mp4",
+  "video/Myboo.mp4",
+  "video/InvincibleSwordman.mp4",
+  "video/ForbiddenZone.mp4",
+  "video/Bigworld.mp4",
+  "video/PandaPlan.mp4"
 ];
 
 // 1. Insert video elements before initializing Swiper
 // ✅ Set video elements first
 document.querySelectorAll('.slideShowMain').forEach((item, index) => {
   item.innerHTML = `
-    <video class="w-full h-full object-cover trailer" muted loop playsinline> <source type="video/mp4"> </video>
+    <video class="w-full h-full object-cover trailer" muted loop playsinline></video>
   `;
 });
 
