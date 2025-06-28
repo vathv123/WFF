@@ -28,17 +28,55 @@ let swiper1;
 let swiper2;
 
 const videoSources = [
-  "../video/HearmeOursummer.mp4",
+  "../video/Hearmeoursummer.mp4",
   "../video/Myboo.mp4",
   "../video/28D.mp4",
-  "../video/smile2.mp4",
+  "../video/Smile2.mp4",
   "../video/DarkFate.mp4",
-  "../video/InvincibleSwordman.mp4",
-  "../video/ForbiddenZone.mp4",
+  "../video/Invincibleswordman.mp4",
+  "../video/Forbiddenzone.mp4",
   "../video/Morbius.mp4",
   "../video/JohnCarter.mp4",
-  "../video/PandaPlan.mp4"
+  "../video/Pandaplan.mp4"
 ];
+
+// Block F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+U, Ctrl+S, Ctrl+Shift+J
+document.onkeydown = function (e) {
+  if (
+    e.key === "F12" ||
+    (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key)) ||
+    (e.ctrlKey && ["U", "S"].includes(e.key.toUpperCase()))
+  ) {
+    e.preventDefault();
+    return false;
+  }
+};
+
+// Block right-click
+document.addEventListener('contextmenu', function (e) {
+  e.preventDefault();
+});
+
+// Detect DevTools via console open (basic check)
+setInterval(function () {
+  const devtools = /./;
+  devtools.toString = function () {
+    throw "DevTools detected";
+  };
+  console.log('%c', devtools);
+}, 1000);
+
+// Force page close if DevTools is open (risky)
+let check = function () {
+  const start = new Date();
+  debugger;
+  const end = new Date();
+  if (end - start > 100) {
+    window.location.replace("about:blank");
+  }
+};
+setInterval(check, 1000);
+
 
 document.querySelectorAll('.slideShowMain').forEach((item, index) => {
   item.innerHTML = `
