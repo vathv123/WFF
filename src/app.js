@@ -41,7 +41,7 @@ const videoSources = [
 // ✅ Set video elements first
 document.querySelectorAll('.slideShowMain').forEach((item, index) => {
   item.innerHTML = `
-    <video class="w-full h-full object-cover trailer" muted loop playsinline> <source type="video/mp4"></video>
+    <video class="w-full h-full object-cover trailer" muted loop playsinline> <source src="${videoSources[index]}" type="video/mp4"> </video>
   `;
 });
 
