@@ -41,7 +41,7 @@ const videoSources = [
 // ✅ Set video elements first
 document.querySelectorAll('.slideShowMain').forEach((item, index) => {
   item.innerHTML = `
-    <video class="w-full h-full object-cover trailer" muted loop playsinline> <source src="${videoSources[index]}" type="video/mp4"> </video>
+    <video class="w-full h-full object-cover trailer" muted loop playsinline> <source type="video/mp4"> </video>
   `;
 });
 
@@ -185,62 +185,30 @@ function unmuteActiveVideo() {
 // Listen once for user interaction anywhere
 window.addEventListener('touchstart', unmuteActiveVideo, { once: true });
 window.addEventListener('click', unmuteActiveVideo, { once: true });
-// function updateVideoPlayback() {
-//   const activeRealIndex = swiper1.realIndex;
-//   document.querySelectorAll('video.trailer').forEach((video, index) => {
-//     if (index === activeRealIndex) {
-//       if (!video.src) {
-//         video.src = videoSources[index];
-//         video.load();
-//       }
-      
-//       if (window.innerWidth <= 756) {
-//         video.muted = !userInteracted;
-//         video.play().catch(err => {
-//           console.warn("Autoplay blocked or failed", err);
-//         });
-//       } else {
-//         video.muted = false;
-//         video.play().catch(err => {
-//           console.warn("Autoplay blocked or failed", err);
-//         });
-//       }
-
-//       video.play().catch(err => {
-//         console.warn("Autoplay blocked or failed", err);
-//       });
-//       video.onended = () => {
-//         swiper2.slideNext();
-//       };
-//     } else {
-//       video.pause();
-//       video.currentTime = 0;
-//       video.muted = true;
-//       video.onended = null;
-//     }
-//   });
-// }
 function updateVideoPlayback() {
   const activeRealIndex = swiper1.realIndex;
   document.querySelectorAll('video.trailer').forEach((video, index) => {
-    const source = video.querySelector('source');
-    
     if (index === activeRealIndex) {
-      if (!source.src || source.src.indexOf(videoSources[index]) === -1) {
-        source.src = videoSources[index];
+      if (!video.src) {
+        video.src = videoSources[index];
         video.load();
       }
       
       if (window.innerWidth <= 756) {
         video.muted = !userInteracted;
+        video.play().catch(err => {
+          console.warn("Autoplay blocked or failed", err);
+        });
       } else {
         video.muted = false;
+        video.play().catch(err => {
+          console.warn("Autoplay blocked or failed", err);
+        });
       }
 
       video.play().catch(err => {
         console.warn("Autoplay blocked or failed", err);
       });
-
       video.onended = () => {
         swiper2.slideNext();
       };
@@ -252,6 +220,38 @@ function updateVideoPlayback() {
     }
   });
 }
+// function updateVideoPlayback() {
+//   const activeRealIndex = swiper1.realIndex;
+//   document.querySelectorAll('video.trailer').forEach((video, index) => {
+//     const source = video.querySelector('source');
+    
+//     if (index === activeRealIndex) {
+//       if (!source.src || source.src.indexOf(videoSources[index]) === -1) {
+//         source.src = videoSources[index];
+//         video.load();
+//       }
+      
+//       if (window.innerWidth <= 756) {
+//         video.muted = !userInteracted;
+//       } else {
+//         video.muted = false;
+//       }
+
+//       video.play().catch(err => {
+//         console.warn("Autoplay blocked or failed", err);
+//       });
+
+//       video.onended = () => {
+//         swiper2.slideNext();
+//       };
+//     } else {
+//       video.pause();
+//       video.currentTime = 0;
+//       video.muted = true;
+//       video.onended = null;
+//     }
+//   });
+// }
 
 
 swiper1.on('slideChangeTransitionEnd', () => {
