@@ -235,7 +235,260 @@
     </div>
     <div class="movie max-w-[1200px] w-full sm:max-h-[140vh] p-3 max-h-[240vh] h-auto bg-black relative hidden gap-3 grid-layout"></div>
     
-
+    * {
+      overscroll-behavior: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      position: relative;
+    }
+    @keyframes fluidMove {
+      0%, 100% {
+        transform: translateY(0%) scaleX(1);
+      }
+      50% {
+        transform: translateY(5%) scaleX(1.05);
+      }
+    }
+    @font-face {
+      font-family: ppmori;
+      src: url(font/ppmori-regular.woff2);
+    }
+    @font-face {
+      font-family: GM;
+      src: url(./font/Gilroy-Medium.ttf);
+    }
+    img {
+      user-select: none !important;
+      pointer-events: none !important;
+    }
+    .fluid-bar {
+      animation: fluidMove 2s ease-in-out infinite;
+      background: linear-gradient(to bottom, #cb0738, #7e031f);
+      filter: blur(1px);
+      border-radius: 20px;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    html {
+      scrollbar-width: none;
+    }
+    .swiper-pagination-bullet {
+      background:rgb(221, 11, 46) !important;
+    }
+    .swiper-pagination-bullet-active {
+      background:rgb(221, 11, 46) !important;
+      box-shadow: 0px 1px 3px rgb(221, 11, 46), 0px 0px 5px rgb(221, 11, 46), 0px 0px 12px rgb(221, 11, 46);
+    }
+    /* .headerPart::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0; top: 0;
+      pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.0) 90%);
+    } */
+    .swiper-button-next, 
+    .swiper-button-prev {
+      color: rgba(229, 225, 225, 0.473) !important;       
+      background: #000;  
+      backdrop-filter: blur(4px);
+      font-size: 20px !important;
+      width: 40px !important;
+      height: 40px !important;
+      display: flex;
+      border-radius: 20px;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      font-size: 20px !important;
+      font-weight: bold !important;
+      color: rgb(221, 11, 46) !important;     
+    }
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+      text-shadow: 0px 1px 3px rgb(221, 11, 46), 0px 0px 5px rgb(221, 11, 46), 0px 0px 12px rgb(221, 11, 46);
+    }
+    .slideShow {
+      width: 100%;
+      display: block;
+      transition: width 0.6s  cubic-bezier(0.85, 0, 0.15, 1), clip-path 0.6s  cubic-bezier(0.85, 0, 0.15, 1), scale 1s  cubic-bezier(0.85, 0, 0.15, 1);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    .swiper-wrapper {
+      overflow: visible; /* allow slides to expand outside */
+    }
+    .swiper-slide {
+      box-sizing: border-box;
+      transition: width 1s  cubic-bezier(0.85, 0, 0.15, 1); /* smooth width changes */
+    }
+    .slideShow, .slideShowMain {
+      transform-origin: top;
+      transition: transform 0.6s  cubic-bezier(0.85, 0, 0.15, 1);
+    }
+    .lists, .list {
+      width: 120px;
+      height: 40px;
+      color: white;
+      font-size: 0.9rem;
+      font-family: GM;
+      border-radius: 120px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #620315;
+    }
+    .lists{
+      background: #620315;
+    }
+    @media (min-width: 601px) {
+      .grid-layout {
+        display: grid;
+        grid-template-columns: 1fr 190px;
+      }
+    }
+    .plyr__control small {
+      display: block;
+      font-size: 10px;
+      line-height: 1;
+      margin-top: -4px;
+    }
+    @media (max-width: 600px) {
+      .grid-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    }
+    .edit::after {
+      content: "";
+      position: fixed;
+      width: 100%;
+      height: 20px;
+      background: #590303;
+      z-index: 1190;
+    }
+    .area::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 210px;
+      z-index: -20;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 1), black, transparent);
+    }
+    @media (min-width: 756px) {
+      .area::after {
+        height: 110px;
+      }
+    }
+    .ABA, .aboutThisWebsite {
+      background: linear-gradient(to top, black, black, transparent, transparent, transparent);
+        background-image:
+        linear-gradient(to top, black, rgba(0, 0, 0, 0.7), transparent, transparent, transparent),
+        linear-gradient(to bottom,  black, rgba(0, 0, 0, 0.7), transparent, transparent, transparent),
+        linear-gradient(to left,   black, rgba(0, 0, 0, 0.7), transparent, transparent, transparent),
+        linear-gradient(to right,   black, rgba(0, 0, 0, 0.7), transparent, transparent, transparent);
+      background-blend-mode: screen;
+      transition: scale 1s ease, opacity 0.3s ease, background 1s ease;
+    }
+    .suggestion-box li,
+    .suggestion-box2 li {
+      padding: 7px 21px;
+    }
+    .suggestion-box::-webkit-scrollbar,
+    .suggestion-box2::-webkit-scrollbar {
+      width: 6px;
+    }
+    .suggestion-box::-webkit-scrollbar-thumb,
+    .suggestion-box2::-webkit-scrollbar-thumb {
+      background: #999;
+      border-radius: 5px;
+    }
+    .fix-vh {
+      height: calc(var(--real-vh, 1vh) * 100);
+    }
+    #suggestions2 {
+      scrollbar-width: 20px;
+      scrollbar-color: #ffffff ;
+    }
+    .swiper3,
+    .swiper4,
+    .swiper5,
+    .swiper6 {
+      position: relative;
+    }
+    .swiper3::after,
+    .swiper4::after,
+    .swiper5::after,
+    .swiper6::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 70px;
+      background: linear-gradient(to top, black, black, transparent);
+      z-index: 1200;
+      left: 0;
+      bottom: 0px;
+    }
+    .swiper3::before,
+    .swiper4::before,
+    .swiper5::before,
+    .swiper6::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 70px;
+      background: linear-gradient(to bottom, black, black, transparent);
+      z-index: 1200;
+      left: 0;
+      top: -20px;
+    }
+    /* .slideShow img {
+      transition: transform 0.5s ease, object-position 0.5s ease, scale 0.7s ease !important;
+      transform: scale(1.1) !important;
+      object-position: right !important;
+      object-fit: cover !important;
+      width: 100% !important;
+      height: 100% !important;
+    } */
+    
+    /* 
+    .swiper-slide {
+      width: 100px;
+      height: 200px !important;
+      transition: width 1.2s cubic-bezier(0.77, 0, 0.175, 1), 
+                  height 1.2s cubic-bezier(0.77, 0, 0.175, 1), 
+                  opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .swiper-slide-active {
+      width: 350px !important;
+      height: 400px !important;
+      transition: width 1.2s cubic-bezier(0.77, 0, 0.175, 1), 
+                  height 1.2s cubic-bezier(0.77, 0, 0.175, 1), 
+                  opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    } */
+    
+    
+    /* .swiper-slide {
+      width: 600px;
+      height: 500px;
+      transition: width 1.2s cubic-bezier(0.77, 0, 0.175, 1), 
+                  height 1.2s cubic-bezier(0.77, 0, 0.175, 1), 
+                  opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    }
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
