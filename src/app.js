@@ -14,7 +14,6 @@ function raf(time) {
 }
 
 requestAnimationFrame(raf);
-
 // document.querySelectorAll('.slideShowMain img').forEach(img => {
 //   img.style.transition = 'scale 1.1 ease'
 //   if (!img.complete) {
@@ -31,25 +30,24 @@ let swiper2;
 const videoSources = [
   "../video/HearmeOursummer.mp4",
   "../video/Myboo.mp4",
+  "../video/28D.mp4",
+  "../video/smile2.mp4",
+  "../video/DarkFate.mp4",
   "../video/InvincibleSwordman.mp4",
   "../video/ForbiddenZone.mp4",
-  "../video/Bigworld.mp4",
+  "../video/Morbius.mp4",
+  "../video/JohnCarter.mp4",
   "../video/PandaPlan.mp4"
 ];
 
-// 1. Insert video elements before initializing Swiper
-// ✅ Set video elements first
 document.querySelectorAll('.slideShowMain').forEach((item, index) => {
   item.innerHTML = `
     <video class="w-full h-full object-cover trailer" muted loop playsinline> <source src="${videoSources[index]}" type="video/mp4"> </video>
   `;
 });
 
-// ✅ THEN select them
 const videos = document.querySelectorAll('.slideShowMain video');
 
-
-// 2. NOW init swiper1 (after DOM is updated)
 swiper1 = new Swiper('.swiper1', {
   slidesPerView: 'auto',
   breakpoints: {
@@ -299,9 +297,13 @@ const movieShow = [
     img: [
       'https://image.tmdb.org/t/p/original/i4VmtHRy4xRkxIRc1VihCnHXdFr.jpg',
       'https://khboxhd.net/wp-content/uploads/2024/10/photo_7_2024-10-12_02-06-47.jpg',
+      'https://khboxhd.net/wp-content/uploads/2024/12/sQckQRt17VaWbo39GIu0TMOiszq.jpg',
+      'https://khboxplay.net/wp-content/uploads/2024/11/photo_2024-11-19_18-05-58.jpg;',
+      'https://khboxhd.net/wp-content/uploads/2024/11/photo_2024-11-17_09-14-59.jpg',
       'https://khboxplay.net/wp-content/uploads/2025/02/7Xzf7IHltlUHosVKKW7cKWtTv1n.jpg',
       'https://khboxplay.net/wp-content/uploads/2024/12/9mS7Q9VBkH8yGrIvajxzRUNEAEE.jpg',
-      'https://khboxplay.net/wp-content/uploads/2025/05/rLj287mA1tp4hZmd69umb1rOZu8.jpg',
+      'https://khboxplay.net/wp-content/uploads/2024/12/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg',
+      'https://khboxhd.net/wp-content/uploads/2024/11/photo_2024-11-17_09-02-10.jpg',
       'https://khboxplay.net/wp-content/uploads/2024/12/95EiKK6SM5k26cLlP37eGcJHzDQ.jpg',
     ]
   }
@@ -344,12 +346,11 @@ const watchMovie = [
       'https://khboxplay.net/wp-content/uploads/2024/12/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg',
       'https://khboxplay.net/wp-content/uploads/2025/05/g3GsgIlH3fA4RxhNOAMvSbVWyfW.jpg',
       'https://khboxplay.net/wp-content/uploads/2024/12/95EiKK6SM5k26cLlP37eGcJHzDQ.jpg',
-      // HorrorMovie
-      'https://khboxhd.net/wp-content/uploads/2024/10/photo_2024-10-03_08-36-51.jpg'
+      'https://khboxhd.net/wp-content/uploads/2025/06/6WxhEvFsauuACfv8HyoVX6mZKFj-200x300.jpg'
     ],
-    name: ['Hear me, Our Summer', 'Happy Monday', 'The Demon\'s Bride', 'Un/Happy for You', 'My Boo', 'Never Say Die', 'Demon Hunter', 'Dont\'t Sleep', 'Forbidden Zone', 'The Finest Hour', 'Big World', 'Invincible Swordman', 'Morbius', 'Detective Chinatown 1900', 'Panda Plan'],
-    type: ['Romance, Drama', 'Romantic, Comedy, Drama', 'Horror, Thriller', 'Drama, Romance', 'Horror, Drama', 'Fantasy, Comedy, Action', 'Action, Fantasy, Korea, Crime, Thriller', 'Comedy, Horror, Thriller', 'Action, Adventure, Fantasy, Thriller', 'Action, Drama, History, Thriller, USA', 'Drama, Family', 'Action, Drama', 'Action, Fantasy, Science Fiction', 'Action, Comedy, Mystery', 'Action, Comedy'],
-    time: ['1h:49mn', '1h:45mn', '1h:42mn', '1h:50mn', '2h:00mn', '1h:40mn', '1h:47mn', '1h:39mn', '1h:27mn', '1h:57mn', '2h:11mn', '2h:00mn', '1h:44mn', "2h:15mn", '1h:39mn'],
+    name: ['Hear me, Our Summer', 'Happy Monday', 'The Demon\'s Bride', 'Un/Happy for You', 'My Boo', 'Never Say Die', 'Demon Hunter', 'Dont\'t Sleep', 'Forbidden Zone', 'The Finest Hour', 'Big World', 'Invincible Swordman', 'Morbius', 'Detective Chinatown 1900', 'Panda Plan', 'Final Destination: Bloodlines'],
+    type: ['Romance, Drama', 'Romantic, Comedy, Drama', 'Horror, Thriller', 'Drama, Romance', 'Horror, Drama', 'Fantasy, Comedy, Action', 'Action, Fantasy, Korea, Crime, Thriller', 'Comedy, Horror, Thriller', 'Action, Adventure, Fantasy, Thriller', 'Action, Drama, History, Thriller, USA', 'Drama, Family', 'Action, Drama', 'Action, Fantasy, Science Fiction', 'Action, Comedy, Mystery', 'Action, Comedy', 'Horror, Mystery'],
+    time: ['1h:49mn', '1h:45mn', '1h:42mn', '1h:50mn', '2h:00mn', '1h:40mn', '1h:47mn', '1h:39mn', '1h:27mn', '1h:57mn', '2h:11mn', '2h:00mn', '1h:44mn', "2h:15mn", '1h:39mn', '1h:44mn'],
     description: [
       "A job seeking dreamer Yong-jun works part-time at his parents' lunch box house. Yeo-reum lives only to support for hearing-impaired swimmer sister. One day, Yong-jun meets Yeo-reum while delivering lunch boxes and falls in love at the first sight. Yeo-reum slowly opens her heart to warm-hearted Yong-jun.", 
       "Earth, a mischievous 8th-year university student, is about to reach its final chapter. In what should be his last semester before graduation, instead of focusing on his studies, he pours all his energy into winning the heart of Sai Mai, a junior student. ",
@@ -365,7 +366,8 @@ const watchMovie = [
       "Linghu Chong, a swordsman longing to leave the martial arts world, is drawn back into the clash between good and evil. On his journey, he unexpectedly crosses paths with Dongfang Bubai, the enigmatic leader of the Demonic Sect, leading to an unpredictable and tumultuous adventure through the martial arts realm.",
       "Dangerously ill with a rare blood disorder, and determined to save others suffering his same fate, Dr. Michael Morbius attempts a desperate gamble. What at first appears to be a radical success soon reveals itself to be a remedy potentially worse than the disease",
       "A Chinese mystery-comedy series set in the year 1900, blending historical elements with thrilling detective work. The story follows a clever young detective who uncovers bizarre crimes and hidden conspiracies in old Chinatown. With sharp wit, traditional settings, and unexpected twists, the series combines humor, suspense, and action as the detective solves each case while navigating cultural clashes and the challenges of the era.",
-      "International action star Jackie Chan is invited to the adoption ceremony of a rare baby panda, but after an international crime syndicate attempts to kidnap the bear, Jackie has to save the bear using his stunt work skills."
+      "International action star Jackie Chan is invited to the adoption ceremony of a rare baby panda, but after an international crime syndicate attempts to kidnap the bear, Jackie has to save the bear using his stunt work skills.",
+      "When a group of first responders narrowly escape a deadly disaster thanks to a chilling premonition, they soon realize that Death doesn’t like to be cheated. As they’re hunted one by one by unseen forces, they must uncover the rules behind their survival — before it's too late."
     ],
     movie: [
       '//ok.ru/videoembed/10792893287056?nochat=1',
@@ -382,7 +384,8 @@ const watchMovie = [
       'https://1a-1791.com/video/fwe2/0e/s8/2/b/7/o/b/b7oby.caa.mp4',
       'https://1a-1791.com/video/fwe2/27/s8/2/p/a/k/9/pak9v.aaa.mp4',
       'https://1a-1791.com/video/fww1/bb/s8/2/B/6/1/G/B61Gy.aaa.mp4',
-      'https://1a-1791.com/video/s8/2/e/c/y/V/ecyVv.caa.mp4?u=0&b=0'
+      'https://1a-1791.com/video/s8/2/e/c/y/V/ecyVv.caa.mp4?u=0&b=0',
+      'https://khboxhd.net/jwplayer?source=https://1a-1791.com/video/fww1/48/s8/2/R/u/v/U/RuvUy.aaa.mp4'
     ]
   },
   {
@@ -2153,3 +2156,4 @@ searchInput2.addEventListener('blur', () => {
 });
 
 HomeReturn()
+
