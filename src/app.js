@@ -29,12 +29,12 @@ let swiper1;
 let swiper2;
 
 const videoSources = [
-  "video/HearmeOursummer.mp4",
-  "video/Myboo.mp4",
-  "video/InvincibleSwordman.mp4",
-  "video/ForbiddenZone.mp4",
-  "video/Bigworld.mp4",
-  "video/PandaPlan.mp4"
+  "src/video/HearmeOursummer.mp4",
+  "src/video/Myboo.mp4",
+  "src/video/InvincibleSwordman.mp4",
+  "src/video/ForbiddenZone.mp4",
+  "src/video/Bigworld.mp4",
+  "src/video/PandaPlan.mp4"
 ];
 
 // 1. Insert video elements before initializing Swiper
