@@ -25,15 +25,14 @@ requestAnimationFrame(raf);
 //   }
 // });
    document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("mainBody").classList.add("hidden");
     document.getElementById("loader").style.display = "flex";
   });
 
   // When all page resources load, swap loader and main content visibility
-  window.addEventListener("load", function () {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("mainBody").classList.remove("hidden");
-  });
+  // window.addEventListener("load", function () {
+  //   document.getElementById("loader").style.display = "none";
+  //   document.getElementById("mainBody").classList.remove("hidden");
+  // });
 let swiper1;
 let swiper2;
 
@@ -784,10 +783,11 @@ function renderNewMovie(index) {
           <div class='text-[#bdb8b86d] text-[0.9rem]'>${movieData.description[index]}</div>
         </div>
       </div>
+      <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return'>Return</button>
     </div>
 
-    <div class='swiper swiper3 h-auto w-full'>
-      <div class='swiper-wrapper w-full flex xl:flex-col xl:gap-[40px]'>
+    <div class='swiper swiper3 sm:max-h-[140vh] max-h-[240vh] sm: w-full'>
+      <div class='swiper-wrapper'>
         ${movieData.img.map((img, i) => {
           if (i === index) return '';
           return `
@@ -806,7 +806,6 @@ function renderNewMovie(index) {
         }).join('')}
       </div>
     </div>
-    <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return'>Return</button>
   `;
   const isIframe = index === 0;
 
@@ -910,7 +909,7 @@ function renderNewMovie(index) {
     } else {
       console.warn('Swiper container not found!');
     }
-  }, 10);
+  }, 100);
 
   const returnBtn = document.querySelector('.return');
   if (returnBtn) {
@@ -1051,9 +1050,10 @@ function renderActionMovie(index) {
           <div class='text-[#bdb8b86d] text-[0.9rem]'>${movieDataAction.description[index]}</div>
         </div>
       </div>
+      <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return2'>Return</button>
     </div>
 
-    <div class='swiper swiper4 h-auto w-full'>
+    <div class='swiper swiper4 sm:max-h-[140vh] max-h-[240vh] w-full'>
       <div class='swiper-wrapper w-full flex xl:flex-col xl:gap-[40px]'>
         ${movieDataAction.img.map((img, i) => {
           if (i === index) return '';
@@ -1073,7 +1073,6 @@ function renderActionMovie(index) {
         }).join('')}
       </div>
     </div>
-    <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return2'>Return</button>
   `;
   const fullScreenVideo = document.querySelector('.fullScreen video')
   const playIcon = document.querySelector('.play-icon');
@@ -1309,9 +1308,10 @@ function renderHorrorMovie(index) {
         <div class='text-[#bdb8b86d] text-[0.9rem]'>${movieDataHorror.description[index]}</div>
       </div>
     </div>
+      <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return3'>Return</button>
   </div>
 
-  <div class='swiper swiper5 h-auto w-full'>
+  <div class='swiper swiper5 sm:max-h-[140vh] max-h-[240vh] w-full'>
     <div class='swiper-wrapper w-full flex xl:flex-col xl:gap-[40px]'>
       ${movieDataHorror.img.map((img, i) => {
         if (i === index) return '';
@@ -1331,8 +1331,6 @@ function renderHorrorMovie(index) {
       }).join('')}
     </div>
   </div>
-  <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return3'>Return</button>
-
   `;
   const fullScreenVideo = document.querySelector('.fullScreen video')
   const playIcon = document.querySelector('.play-icon');
@@ -1816,9 +1814,10 @@ function performSearch(movieName) {
             <div class='text-[#bdb8b86d] text-[0.9rem]'>${clickedMovie.description}</div>
           </div>
         </div>
+        <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return4'>Return</button>
       </div>
 
-      <div class='swiper swiper6 h-auto w-full'>
+      <div class='swiper swiper6 sm:max-h-[140vh] max-h-[240vh]  w-full'>
         <div class='swiper-wrapper w-full flex xl:flex-col xl:gap-[40px]'>
           ${watchMovie[sectionIndex].name.map((name, i) => `
             <div class='swiper-slide flex flex-col w-full h-auto'>
@@ -1835,7 +1834,6 @@ function performSearch(movieName) {
           `).join('')}
         </div>
       </div>
-      <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return4'>Return</button>
     `;
   const isIframe = index === 0;
   if (!isIframe) {
@@ -2163,9 +2161,10 @@ searchInput.addEventListener('keydown', (e) => {
               <div class='text-[#bdb8b86d] text-[0.9rem]'>${clickedMovie.description}</div>
             </div>
           </div>
+          <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return4'>Return</button>
         </div>
 
-        <div class='swiper swiper6 h-auto w-full'>
+        <div class='swiper swiper6 sm:max-h-[140vh] max-h-[240vh]  w-full'>
           <div class='swiper-wrapper w-full flex xl:flex-col xl:gap-[40px]'>
             ${watchMovie[sectionIndex].name.map((name, i) => `
               <div class='swiper-slide flex flex-col w-full h-auto'>
@@ -2182,7 +2181,6 @@ searchInput.addEventListener('keydown', (e) => {
             `).join('')}
           </div>
         </div>
-        <button class='w-full h-[30px] bg-black border border-[#ad0725] cursor-pointer text-[#ad0725] text-[1.1rem] z-[1200] return4'>Return</button>
       `;
   const isIframe = index === 0;
   if (!isIframe) {
